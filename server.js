@@ -1,12 +1,17 @@
+'use client';
 const { createServer } = require('http')
 const { parse } = require('url')
 const next = require('next')
+const { useState } = require('react')
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
 const port = process.env.PORT || 8080
 const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
+
+const [isEditing, setIsEditing] = useState(false);
+const [editedUser, setEditedUser] = useState(user);
 
 app.prepare().then(() => {
   createServer(async (req, res) => {
@@ -27,3 +32,7 @@ app.prepare().then(() => {
       console.log(`> Ready on http://${hostname}:${port}`)
     })
 })
+
+async function updateUser(userData: User) {
+  // APIエンドポイントへのPUTリクエスト
+}
