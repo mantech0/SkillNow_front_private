@@ -1,5 +1,5 @@
 name: Deploy Frontend to Azure
-2|
+
 on:
   push:
     branches:
@@ -14,24 +14,24 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-    
-    - name: Install dependencies
-      run: |
-        npm install
-        
-    - name: Build
-      run: |
-        npm run build
-        
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: .
+      - uses: actions/checkout@v2
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Install dependencies
+        run: |
+          npm install
+          
+      - name: Build
+        run: |
+          npm run build
+          
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: .
