@@ -18,10 +18,13 @@ type SearchParams = {
   prefecture?: string;
 }
 
+// APIのベースURL
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+
 // APIからユーザーデータを取得する関数
 async function getUsers(): Promise<User[]> {
   try {
-    const response = await fetch('http://localhost:5001/api/users', {
+    const response = await fetch(`${API_URL}/api/users`, {
       next: { revalidate: 60 } // 60秒ごとにキャッシュを更新
     });
     
