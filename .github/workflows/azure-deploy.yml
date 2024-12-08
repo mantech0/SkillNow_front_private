@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+env:
+  AZURE_WEBAPP_NAME: tech0-gen-8-step3-testapp-node2-26
+  NODE_VERSION: '18.x'
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -15,21 +19,19 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18.x'
+        node-version: ${{ env.NODE_VERSION }}
     
     - name: Install dependencies
       run: |
-        cd frontend  # フロントエンドディレクトリに移動
         npm install
         
     - name: Build
       run: |
-        cd frontend
         npm run build
         
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'tech0-gen-8-step3-testapp-node2-26'
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: frontend  # デプロイするディレクトリを指定
+        package: .
