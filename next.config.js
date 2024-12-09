@@ -6,7 +6,9 @@ const nextConfig = {
     outputStandalone: true
   },
   env: {
-    NEXT_PUBLIC_API_URL: 'https://tech0-gen-8-step3-testapp-py2-26.azurewebsites.net'
+    NEXT_PUBLIC_API_URL: process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:5001'
+      : 'https://tech0-gen-8-step3-testapp-py2-26.azurewebsites.net'
   }
 }
 
